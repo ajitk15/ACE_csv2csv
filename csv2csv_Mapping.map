@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="/csv2csv_comma.xsd"/>
+    <output path="/csv2csv_piped.xsd"/>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="csv2csv_Mapping">
+        <input path="mb:msg(csv2csv_comma,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_csv2csv_comma"/>
+        <output path="mb:msg(csv2csv_piped,assembly,DFDL,Properties)" var="ComIbmMessageAssembly_csv2csv_piped"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_csv2csv_comma/Properties"/>
+            <output path="$ComIbmMessageAssembly_csv2csv_piped/Properties"/>
+            <override>
+                <assign value="{}:csv2csv_piped">
+                    <output path="$ComIbmMessageAssembly_csv2csv_piped/Properties/MessageType"/>
+                </assign>
+            </override>
+        </move>
+        <local>
+            <input path="$ComIbmMessageAssembly_csv2csv_comma/csv2csv_comma/header"/>
+            <output path="$ComIbmMessageAssembly_csv2csv_piped/csv2csv_piped/header"/>
+            <move automap="true">
+                <input path="id"/>
+                <output path="id"/>
+            </move>
+            <move automap="true">
+                <input path="firstName"/>
+                <output path="firstName"/>
+            </move>
+            <move automap="true">
+                <input path="lastName"/>
+                <output path="lastName"/>
+            </move>
+            <move automap="true">
+                <input path="email"/>
+                <output path="email"/>
+            </move>
+            <move automap="true">
+                <input path="position"/>
+                <output path="position"/>
+            </move>
+            <move automap="true">
+                <input path="salary"/>
+                <output path="salary"/>
+            </move>
+        </local>
+        <foreach>
+            <input path="$ComIbmMessageAssembly_csv2csv_comma/csv2csv_comma/record"/>
+            <output path="$ComIbmMessageAssembly_csv2csv_piped/csv2csv_piped/record"/>
+            <move automap="true">
+                <input path="id"/>
+                <output path="id"/>
+            </move>
+            <move automap="true">
+                <input path="firstName"/>
+                <output path="firstName"/>
+            </move>
+            <move automap="true">
+                <input path="lastName"/>
+                <output path="lastName"/>
+            </move>
+            <move automap="true">
+                <input path="email"/>
+                <output path="email"/>
+            </move>
+            <move automap="true">
+                <input path="position"/>
+                <output path="position"/>
+            </move>
+            <move automap="true">
+                <input path="salary"/>
+                <output path="salary"/>
+            </move>
+        </foreach>
+    </mappingDeclaration>
+</mappingRoot>
